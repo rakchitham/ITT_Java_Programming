@@ -1,0 +1,26 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		Scanner cs=new Scanner(System.in);
+		if(cs.hasNextInt())
+		{
+		    int t=cs.nextInt();
+		    while(t-- >0)
+		    {
+		        int current=cs.nextInt();
+		        int goal=cs.nextInt();
+		        int dollar=cs.nextInt();
+		        int temp=goal-current;
+		        int years=temp/dollar;
+		        System.out.println(years);
+		    }
+		}
+
+	}
+}
