@@ -13,7 +13,7 @@ class Solution {
                 c = 0;
             }
         }
-        
+
         return temp; 
     }
 }
