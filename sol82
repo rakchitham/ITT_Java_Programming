@@ -1,0 +1,64 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+
+        boolean[][] v = new boolean[m][n];
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(board[i][j] == word.charAt(0)) {
+                    v[i][j] = true;
+                    boolean res = func(i, j, 1, v, board, word);
+                    v[i][j] = false;
+                    if(res){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean func(int i, int j, int k, boolean[][] v, char[][] board, String word){
+        if(k == word.length()) {
+            return true;
+        }
+
+        //right
+        boolean right = false;
+        if(j<board[0].length-1 && v[i][j+1] == false && word.charAt(k) == board[i][j+1]){
+            v[i][j+1] = true;
+            right = func(i, j+1, k+1, v, board, word);
+            v[i][j+1] = false;
+            if (right) return true;
+        }
+        // Left
+        boolean left = false;
+        if (j > 0 && v[i][j - 1] == false && word.charAt(k) == board[i][j - 1]) {
+            v[i][j - 1] = true;
+            left = func(i, j - 1, k + 1, v, board, word);
+            v[i][j - 1] = false;
+            if (left) return true;
+        }
+
+        // Up
+        boolean up = false;
+        if (i > 0 && v[i - 1][j] == false && word.charAt(k) == board[i - 1][j]) {
+            v[i - 1][j] = true;
+            up = func(i - 1, j, k + 1, v, board, word);
+            v[i - 1][j] = false;
+            if (up) return true;
+        }
+
+        // Down
+        boolean down = false;
+        if (i < board.length - 1 && v[i + 1][j] == false && word.charAt(k) == board[i + 1][j]) {
+            v[i + 1][j] = true;
+            down = func(i + 1, j, k + 1, v, board, word);
+            v[i + 1][j] = false;
+            if (down) return true;
+        }
+
+        return up || down || left || right;
+    }
+}
