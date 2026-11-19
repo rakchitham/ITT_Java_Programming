@@ -1,0 +1,31 @@
+  class Solution {
+    public List<String> letterCombinations(String d) {
+        List<String> r = new ArrayList<>();
+        if (d==null || d.length()==0) {
+            return r;
+        }
+        Map<Character, String> map = new HashMap<>();
+        map.put('2',"abc");
+        map.put('3',"def");
+        map.put('4',"ghi");
+        map.put('5',"jkl");
+        map.put('6',"mno");
+        map.put('7',"pqrs");
+        map.put('8',"tuv");
+        map.put('9',"wxyz");
+        find(d, 0, new StringBuilder(), r, map);
+        return r;        
+    }
+    private void find(String d, int i, StringBuilder c, List<String> r, Map<Character, String> map) {
+        if (i == d.length()) {
+            r.add(c.toString());
+            return;
+            }
+        String l = map.get(d.charAt(i));
+        for (char j : l.toCharArray()) {
+            c.append(j);
+            find(d, i+1,c, r,map);
+            c.deleteCharAt(c.length() - 1);
+        }
+    }    
+}
